@@ -1,0 +1,12 @@
+{
+  "scenarios": [
+    {
+      "starting_prompt": "What can you do for me?",
+      "conversation_plan": "Ask the agent to turn on the floor lamp in the living room. After that ask it to turn off the floor lamp in the living room."
+    },
+    {
+      "starting_prompt": "Hi there, what can you do?",
+      "conversation_plan": "Ask the agent to turn on the desk lamp in the office. After that ask it to turn on the pool pump."
+    }
+  ]
+}

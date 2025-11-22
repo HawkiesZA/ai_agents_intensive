@@ -113,7 +113,7 @@ async def run_session(
     else:
         print("No queries!")
 
-async def run_forgetful_ai():
+async def run_forgetful_ai(retry_config: types.HttpRetryOptions):
     # Step 1: Create the LLM Agent
     root_agent = Agent(
         model=Gemini(model=MODEL_NAME, retry_options=retry_config),
@@ -140,7 +140,7 @@ async def run_forgetful_ai():
         "stateful-agentic-session",
     )
 
-async def run_persistent_ai():
+async def run_persistent_ai(retry_config: types.HttpRetryOptions):
     # Step 1: Create the same agent (notice we use LlmAgent this time)
     chatbot_agent = LlmAgent(
         model=Gemini(model="gemini-2.5-flash-lite", retry_options=retry_config),
@@ -180,7 +180,7 @@ async def run_persistent_ai():
     #     "test-db-session-02"
     # )  # Note, we are using new session name
 
-async def run_persistent_ai_with_compacting():
+async def run_persistent_ai_with_compacting(retry_config: types.HttpRetryOptions):
     chatbot_agent = LlmAgent(
         model=Gemini(model="gemini-2.5-flash-lite", retry_options=retry_config),
         name="text_chat_bot",
@@ -240,7 +240,7 @@ async def run_persistent_ai_with_compacting():
 
     await get_final_session_state(research_runner_compacting, session_service)
 
-async def run_persistent_ai_with_compacting_and_tools():
+async def run_persistent_ai_with_compacting_and_tools(retry_config: types.HttpRetryOptions):
     # Create an agent with session state tools
     root_agent = LlmAgent(
         model=Gemini(model="gemini-2.5-flash-lite", retry_options=retry_config),
@@ -334,13 +334,13 @@ def cleanup():
         os.remove("my_agent_data.db")
 
 async def main(retry_config: types.HttpRetryOptions):
-    #await run_forgetful_ai()
-    #await run_persistent_ai()
+    #await run_forgetful_ai(retry_config)
+    #await run_persistent_ai(retry_config)
 
-    #await run_persistent_ai_with_compacting()
+    #await run_persistent_ai_with_compacting(retry_config)
     #check_data_in_db()
 
-    await run_persistent_ai_with_compacting_and_tools()
+    await run_persistent_ai_with_compacting_and_tools(retry_config)
 
 if __name__ == "__main__":
     # Handle transient errors with exponential backoff

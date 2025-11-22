@@ -42,3 +42,18 @@ To run the web server, run:
 ```bash
 uv run adk web
 ```
+
+### Day 4 / Home Automation Agent
+To run the home automation agent integration tests, run:
+
+```bash
+uv run adk eval home_automation_agent home_automation_agent/integration.evalset.json --config_file_path=home_automation_agent/test_config.json --print_detailed_results
+```
+
+To run the home automation user simulation tests, run:
+
+```bash
+uv run adk eval home_automation_agent --config_file_path home_automation_agent/eval_config.json eval_set_with_scenarios --print_detailed_results
+```
+
+Note that these two sets of tests use different Evaluation Criteria. The integration tests use the `tool_trajectory_avg_score` and `response_match_score` criteria, while the user simulation tests use the `hallucinations_v1`, `safety_v1` criteria. You can find out more about Evaluation Criteria [here](https://google.github.io/adk-docs/evaluate/criteria/).

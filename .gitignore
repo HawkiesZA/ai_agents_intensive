@@ -15,3 +15,5 @@ wheels/
 # SQLite database
 *.db
 
+# ADK
+.adk
